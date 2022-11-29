@@ -1,0 +1,20 @@
+<%- include('header') %>
+
+<div class="container">
+  <div class="jumbotron centered">
+    <h1 style="text-align: center; color: white; background-color: black;">Add new product!</h1>
+
+    <form action="/submit" method="POST">
+
+      <div class="form-group">
+        <input type="text" class="form-control text-center" name="productName" placeholder="Your product name?">
+        <input type="text" class="form-control text-center" name="productPrice" placeholder="Your product?">
+        <input type="text" class="form-control text-center" name="productDescription" placeholder="Your product description?">
+        <input type="file" accept="image/*" class="form-control text-center" name="productImage" placeholder="Your transaction image?">
+      </div>
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+  </div>
+</div>
+</body>
+<%- include('footer') %>
