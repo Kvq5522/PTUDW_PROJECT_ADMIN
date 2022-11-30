@@ -24,4 +24,4 @@ app.use(passport.session());
 
 router(app);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App is listening on port ${port}!`));
