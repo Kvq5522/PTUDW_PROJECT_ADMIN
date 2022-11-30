@@ -4,6 +4,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 const port = 3000;
+const router = require('./routes/index');
 
 const app = express();
 
@@ -21,47 +22,6 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-	res.render('index');
-});
-
-app.get('/login', (req, res) => {
-	res.render('login');
-});
-
-app.get('/submit', (req, res) => {
-	res.render('submit');
-});
-
-app.get('/home', (req, res) => {
-	res.render('home');
-});
-
-app.get('/customer', (req, res) => {
-	res.render('customer');
-});
-
-app.get('/product', (req, res) => {
-	res.render('product');
-});
-
-app.get('/order', (req, res) => {
-	res.render('order');
-});
-
-app.post('/login', (req, res) => {
-	res.redirect('/product');
-});
-
-app.get('/logout', (req, res) => {
-    req.logOut((err) =>{
-        if (!err) {
-            res.redirect('/');
-            return;
-        }
-
-        res.status(404).send('Error');
-    });
-});
+router(app);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
