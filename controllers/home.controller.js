@@ -7,7 +7,7 @@ const getLoginPage = (req, res) => {
 }
 
 const postLoginPage = (req, res) => {
-    res.render('product');
+    res.redirect('/product');
 }
 
 const getLogoutPage = (req, res) => {

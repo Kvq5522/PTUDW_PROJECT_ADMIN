@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve" : "nodemon index.js",
-    "start" : "node index.js"
+    "serve": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,10 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "mongoose": "^6.7.5",
+    "mongoose-encryption": "^2.1.2",
+    "mongoose-findorcreate": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0"
   }
 }
