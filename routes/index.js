@@ -1,7 +1,7 @@
-const homeRouter = require('./home.route');
-const productRouter = require('./product.route');
-const orderRouter = require('./order.route');
-const customerRouter = require('./customer.route');
+const homeRouter = require('./Home.route');
+const productRouter = require('./Product.route');
+const orderRouter = require('./Order.route');
+const customerRouter = require('./Customer.route');
 
 const route = (app) => {
     app.use('/', homeRouter);
