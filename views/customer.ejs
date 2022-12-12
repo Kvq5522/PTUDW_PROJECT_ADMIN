@@ -4,32 +4,21 @@
 <br />
 <form class="container">
 	<div class="row">
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
+		<% for (let i = 0; i < customerList.length; i++) { %>
+			<div class="col-sm-4" style="padding: 10px; gap: 10px">
+				<div class="col-sm-4">
+					<div class="card" style="width: calc(100vw / 4);">
+						<div class="card-body">
+							<h5 class="card-title"><%= customerList[i].username %></h5>
+							<p class="card-text"><%= customerList[i].phone_number %></p>
+							<p class="cart-text"><%= customerList[i].address %></p>
+							<a href="/customer/<%= customerList[i].id %>">Click to view detail</a>
+						</div>
+					</div>
+					
 				</div>
 			</div>
-		</div>
-
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
-				</div>
-			</div>
-		</div>
+		<% } %>
 	</div>
 </form>
 <%- include('footer') %>

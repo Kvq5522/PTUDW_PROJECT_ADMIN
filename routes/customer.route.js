@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     controller.getCustomerPage(req, res);
 });
 
+router.get('/:customerID', (req, res) => {
+    controller.getCustomerDetailPage(req, res)
+});
+
 module.exports = router;

@@ -18,4 +18,8 @@ router.get('/delete/:productID', async (req, res) => {
     await controller.deleteProduct(req, res);
 }); 
 
+router.get('/:productID', async (req, res) => {
+    await controller.getProductDetailPage(req, res)
+});
+
 module.exports = router;

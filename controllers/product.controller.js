@@ -1,13 +1,26 @@
 const products = require('../models/Product.model');
+const qs = require('qs');
 
 const getProductPage = (req, res) => {
-    products.Product.find({}, (err, data) => {        
+    const {sort, color, priceRange, sortValue, ...withoutFilter} = req.query;
+
+    let nameFilter = withoutFilter.name ? withoutFilter.name : ''; 
+    nameFilter = nameFilter.charAt(0).toUpperCase() + nameFilter.slice(1);
+    let colorFilter = color ? color : '';
+    let sortFilter = sort ? sort : 'name';
+    let lowPivot = priceRange ? Number(priceRange.split('-')[0]) : 0;
+    let highPivot = priceRange ? Number(priceRange.split('-')[1]) : 1e9;
+    let sortValueFilter = sortValue ? Number(sortValue) : 1;    
+
+    products.Product.find({name: {'$regex': nameFilter, '$options': 'i'}, color: {'$regex': colorFilter}, 
+    price: {$gte: lowPivot, $lte: highPivot}}).sort([[`${sortFilter}`, sortValueFilter]]).exec((err, data) => {
         if (err) {
             console.log(err);
-            res.status(500).send('Internal Error');
-        } 
-        
-        res.render('product', { productList: data });
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        res.render('product', { productList: data, originalUrl: `${req.baseUrl}?${qs.stringify(withoutFilter)}` });
     });
 }
 
@@ -43,9 +56,32 @@ const deleteProduct = (req, res) => {
     });
 }
 
+const getProductDetailPage = (req, res) => {
+    const id = req.params.productID;
+
+    products.Product.findById(id, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        products.Product.find({ color: data.color }).where('_id').ne(id).exec((err, listData) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');  
+                return;
+            }
+
+            res.render('product_detail', { item: data, relatedList: listData});
+        });
+    });
+};
+
 module.exports = {
     getProductPage,
     getSubmitPage,
     submitProduct,
-    deleteProduct
+    deleteProduct,
+    getProductDetailPage
 }
