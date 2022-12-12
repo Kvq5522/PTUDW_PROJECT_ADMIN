@@ -2,44 +2,156 @@
 
 <br />
 
-<form
-  class="container"
-  style="height: calc(100vh - 251px); width: calc(100vw - 100px)"
->
-  <div class="row" style="padding-right: 15px">
-    <a
-      class="btn btn-primary"
-      href="/product/submit"
-      style="margin-left: auto"
-      role="button"
-      >Add product</a
-    >
-  </div>
+<body>
+  <form
+    class="container"
+  >
+    <div class="row" style="padding-right: 15px">
+      <a
+        class="btn btn-primary"
+        href="/product/submit"
+        style="margin-left: auto"
+        role="button"
+        >Add product</a
+      >
+    </div>
+  </form>
+
   <br />
-  <div class="row">
-    <% for (let i = 0; i < productList.length; i++) { %>
-    <div class="col-sm-4">
-      <div class="card">
-        <img
-          class="card-img-top"
-          src="<%= productList[i].image_url %>"
-          alt="flower image"
-		  style="width: 192px; height: 192px; object-fit: cover; object-position: center center; border-radius: 50"
-        />
-        <div class="card-body">
-          <h5 class="card-title"><%= productList[i].name %></h5>
-          <p class="card-text"><%= productList[i].price %>$</p>
-          <a
-            href="/product/delete/<%= productList[i].id %>"
-            class="btn btn-primary"
-            role="button"
-            ><i class="fa fa-trash" aria-hidden="true"></i
-          ></a>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="flex-flow: column; width: calc(100vw * 0.3)">
+      <form
+        action="/product"
+        method="get"
+        class="container"
+        style="
+          justify-content: center;
+          width: calc((100vw * 0.3));
+          padding: 10px;
+          gap: 10px;
+        "
+      >
+        <div style="display: flex">
+          <input
+            type="text"
+            name="name"
+            style="width: calc((100vw * 0.3) * 0.8)"
+            placeholder="Product Name?"
+          />
+          <input
+            type="submit"
+            value="Submit"
+            style="width: calc((100vw * 0.3) * 0.2)"
+          />
+        </div>
+
+        <br />
+
+        <div style="display: flex; gap: 10px">
+          <div>
+            <label for="sort">Sort by ↑:</label>
+            <select name="sort">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+              <option value="date">Date</option>
+            </select>
+          </div>
+          <div>
+            <label for="sortValue">Value</label>
+            <select name="sortValue">
+              <option value="1">Ascending</option>
+              <option value="-1">Descending</option>
+            </select>
+          </div>
+        </div>
+
+        <br />
+
+        <div>
+          <label for="color">Filter by Color:</label>
+          <select name="color">
+            <option value="">All</option>
+            <option value="Red">Red</option>
+            <option value="Pink">Pink</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Orange">Orange</option>
+            <option value="White">White</option>
+            <option value="Blue">Blue</option>
+            <option value="Purple">Purple</option>
+          </select>
+        </div>
+
+        <br />
+
+        <div>
+          <label for="priceRange">Filter by Price:</label>
+          <select name="priceRange">
+            <option value="0-1e9">All</option>
+            <option value="0-1000">0-1000</option>
+            <option value="1000-2500">1000-2500</option>
+            <option value="2500-5000">2500-5000</option>
+            <option value="5000-10000">5000-10000</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div style="flex-flow: column; width: calc(100vw * 0.7)">
+      <!-- <% for (let i = 0; i < productList.length; i++) { %>
+      <div class="col-sm-4">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="<%= productList[i].image_url %>"
+            alt="flower image"
+            style="
+              width: 192px;
+              height: 192px;
+              object-fit: cover;
+              object-position: center center;
+              border-radius: 50;
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= productList[i].name %></h5>
+            <p class="card-text"><%= productList[i].price %>$</p>
+            <a
+              href="/product/delete/<%= productList[i].id %>"
+              class="btn btn-primary"
+              role="button"
+              ><i class="fa fa-trash" aria-hidden="true"></i
+            ></a>
+          </div>
         </div>
       </div>
+      <% } %> -->
+      <div class="row">
+        <% for (let i = 0; i < productList.length; i++) { %>
+        <div class="col-sm-4" style="padding: 10px;">
+          <div class="card">
+            <a
+              href="/product/<%= productList[i].id %>"
+              style="display: flex; width: 100%; justify-content: center"
+              ><img
+                src="<%= productList[i].image_url %>"
+                alt="flower"
+                style="width: 192px; height: 192px; object-fit: cover; object-position: center center; border-radius: 50"
+            /></a>
+            <div class="card-body">
+              <h5 class="card-title"><%= productList[i].name %></h5>
+              <p class="card-text"><%= productList[i].price %>$</p>
+              <a
+              href="/product/delete/<%= productList[i].id %>"
+              class="btn btn-primary"
+              role="button"
+              ><i class="fa fa-trash" aria-hidden="true"></i
+            ></a>
+            </div>
+          </div>
+        </div>
+        <% } %>
     </div>
-    <% } %>
   </div>
-</form>
-
+</body>
 <%- include('footer') %>
