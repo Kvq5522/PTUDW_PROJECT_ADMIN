@@ -1,60 +1,60 @@
 <%- include('header') %>
 
-  <hr class="hr-to-paragraph" />
+<body>
 
-  <div
-    class="container"
-    style="display: flex; justify-content: center; align-items: center"
-  >
-    <form
-      style="
-        display: flex;
-        background-color: white;
-        gap: 50px;
-        padding: 50px;
-        border-radius: 10px;
-        width: calc(100vw - 100px);
-      "
-    >
-      <div style="display: flex">
-        <img
-          src="<%= item.image_url %>"
-          alt="flower"
-          style="width: 400px; height: 400px; object-fit: cover;"
-        />
-      </div>
 
-      <div
-        style="
-          display: flex;
-          flex-flow: column;
-          justify-content: space-between;
-          flex: 2;
-        "
-      >
-        <div>
-          <h5><%= item.name %></h5>
-          <p><%= item.description %></p>
-        </div>
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            justify-self: flex-end;
-            gap: 100px;
-          "
-        >
-          <h5>Price: <div name="price"><%= item.price %>$</div></h5>
-          <a href="/user/cart/add/<%= item.id %>?price=<%= item.price %>">
-              <i class="fa-solid fa-cart-shopping" style="color: #FF8F52"></i>
-          </a>
+  <div class="container-update-product" style="  max-width: 1200px;
+  padding: 2rem;
+  margin: 0 auto;">
+    <div class="admin-update-product">
+      <form style="max-width: 50rem;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: .5rem;
+      background: var(--bg-color);">
+          <h3 style="  
+          text-transform: uppercase;
+          color: var(--black);
+          margin-bottom: 1rem;
+          text-align: center;">Update Product</h3>
+          <input type="text" placeholder="enter new product name" name="product_name" class="box" style="width: 100%;
+          border-radius: .5rem;
+          padding: 1.2rem 1.5rem;
+          font-size: 1.7rem;
+          margin: 1rem 0;">
+          <input type="number" placeholder="enter new price " name="product_price" class="box" style="width: 100%;
+          border-radius: .5rem;
+          padding: 1.2rem 1.5rem;
+          font-size: 1.7rem;
+          margin: 1rem 0;">
+          <input type="text" placeholder="enter new description " name="product_des" class="box" style="width: 100%;
+          border-radius: .5rem;
+          padding: 1.2rem 1.5rem;
+          font-size: 1.7rem;
+          margin: 1rem 0;">
+          <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image"  class="box" style="width: 100%;
+          border-radius: .5rem;
+          padding: 1.2rem 1.5rem;
+          font-size: 1.7rem;
+          margin: 1rem 0;">
+          <input type="submit" class="btn" name="update_product" value="update product" style=" display: block;
+          width: 100%;
+          cursor: pointer;
+          border-radius: .5rem;
+          margin-top: 1rem;
+          font-size: 1.7rem;
+          padding: 1rem 3rem;
+          background: orange;
+          color: var(--white);" >
+      </form>
+    </div>
+    
+       
+  </div>    
+        
           
-        </div>
-      </div>
-    </form>
-  </div>
+     
 
-  <br />
 </body>
 
 <%- include('footer') %>
