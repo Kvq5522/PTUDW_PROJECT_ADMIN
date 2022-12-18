@@ -1,35 +1,79 @@
-<%- include('header') %> 
-<%- include('navbar')%>
+<%- include('header') %> <%- include('navbar')%>
 
 <br />
-<form class="container">
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
-				</div>
-			</div>
-		</div>
 
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
-				</div>
-			</div>
-		</div>
+<div style="display: flex; justify-content: center; gap: 20px">
+  <div style="flex-flow: column; width: calc(100vw * 0.3)">
+    <form
+      action="/customer"
+      method="get"
+      class="container"
+      style="
+        justify-content: center;
+        width: calc((100vw * 0.3));
+        padding: 10px;
+        gap: 10px;
+      "
+    >
+      <div style="display: flex">
+        <input
+          type="text"
+          name="name"
+          style="width: calc((100vw * 0.3) * 0.8)"
+          placeholder="Search by name"
+        />
+        <input
+          type="submit"
+          value="Submit"
+          style="width: calc((100vw * 0.3) * 0.2)"
+        />
+      </div>
 
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Customer Name</h5>
-					<p class="card-text">Phone number</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-<%- include('footer') %>
+      <br />
+
+      <div style="display: flex; gap: 10px">
+        <div>
+          <label for="sort">Sort by ↑:</label>
+          <select name="sort">
+            <option value="username">Name</option>
+            <option value="date">Registration time</option>
+          </select>
+        </div>
+        <div>
+          <label for="sortValue">Value</label>
+          <select name="sortValue">
+            <option value="1">Ascending</option>
+            <option value="-1">Descending</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div style="flex-flow: column; width: calc(100vw * 0.7)">
+    <div class="row">
+      <div class="row">
+        <% for (let i = 0; i < customerList.length; i++) { %>
+        <div class="col-sm-4" style="padding: 10px; gap: 10px">
+          <div class="card" style="width: max-content">
+            <div class="card-body">
+              <h5 class="card-title"><%= customerList[i].username %></h5>
+              <p class="card-text"><%= customerList[i].phone_number %></p>
+              <p class="card-text"><%= customerList[i].address %></p>
+              <p class="card-text">Status: <%= customerList[i].ban ? 'Banned' : 'Active' %> </p>
+              <a
+                href="/customer/detail/<%= customerList[i].id %>"
+                class="btn btn-primary"
+                role="button"
+                >Click for more detail</a
+              >
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <%- include('footer') %>
+  </div>
+</div>

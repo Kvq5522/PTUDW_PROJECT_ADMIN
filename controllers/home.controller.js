@@ -2,49 +2,49 @@ const users = require('../models/User.model');
 const passport = require('passport');
 
 const getHomePage = (req, res) => {
-    console.log(req.user);
     res.render('index');
 }
 
 const getLoginPage = (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect('/product');
+        return;
     }
 
     res.render('login');
 }
 
-const postLoginPage = (req, res) => {
-    // const { username, password } = req.body;
+const postLoginPage = (req, res, next) => {
+    const user = new users.User({
+        username: req.body.username,
+        password: req.body.password
+    })
 
-    // users.User.find({ username: username }, (err, user) => {
-    //     if (err) {
-    //         console.log(err);
-    //     }
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Internal server error');
+            return
+        }
 
-    //     // if (user.role === 'admin') {
-    //     //     const loginUser = new users.User({
-    //     //         username: username,
-    //     //         password: password
-    //     //     });
+        if (!user) {
+            res.send(info.message);
+            return;
+        }
 
-    //     //     console.log(loginUser)
+        if (user.role !== 'admin') {
+            res.send('Not authorized');
+            return;
+        }
 
-    //     //     req.login(loginUser, (err) => {
-    //     //         passport.authenticate('local')(req, res, () => {
-    //     //             res.redirect('/product');
-    //     //         });
-    //     //     });
-    //     // }
+        req.logIn(user, (err) => {
+            if (err) {
+                console.log(err);
+            }
 
-    //     req.login(user, (err) => {
-    //         passport.authenticate('local')(req, res, () => {
-    //             res.redirect('/product');
-    //         }); 
-    //     });
-    // });
-
-    res.redirect('/product');
+            res.redirect('/product');
+        });
+    })(req, res, next);
 }
 
 const getLogoutPage = (req, res) => {

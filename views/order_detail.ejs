@@ -1,0 +1,106 @@
+<%- include('header') %> <%- include('navbar') %>
+<body>
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    "
+  >
+    <div
+      style="
+        background-color: white;
+        width: 600px;
+        padding: 20px;
+        display: flex;
+      "
+    >
+      <h4>Your cart</h4>
+
+      <div>
+        <form style="display: flex; flex-flow: column; gap: 20px">
+          <% for (let i = 0; i < orderDetail.length; i++) { %>
+          <div style="display: flex; gap: 10px; padding: 20px">
+            <img
+              src="<%= orderDetail[i].image_url %>"
+              alt="flower"
+              style="object-fit: cover; width: 80px; height: 80px"
+            />
+            <div
+              style="
+                display: flex;
+                flex-flow: column;
+                flex: 1;
+                justify-content: space-between;
+              "
+            >
+              <div style="display: flex; justify-content: space-between">
+                <h6><%= orderDetail[i].name %></h6>
+                </a>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end">
+                <h6>Cost: <%= orderDetail[i].price %>$</h6>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </form>
+      </div>
+    </div>
+
+    <div
+      style="
+        background-color: white;
+        height: max-content;
+        width: 300px;
+        padding: 10px;
+        gap: 20px;
+      "
+    >
+      <h5>Total: <%= total %>$</h5>
+
+      <a
+        href="/order/submit?orderID=<%= orderID %>&isDone=true&isDeleted=false"
+        role="button"
+        style="
+          width: 100px;
+          justify-content: center;
+          background-color: blue;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          text-decoration: none;
+          padding: 3px;
+        "
+      >
+        Done
+      </a>
+
+      <br />
+
+      <a
+        href="/order/submit?orderID=<%= orderID %>&isDeleted=true&isDone=false"
+        role="button"
+        style="
+          width: 100px;
+          justify-content: center;
+          background-color: blue;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          text-decoration: none;
+          padding: 3px;
+        "
+      >
+        Delete
+      </a>
+    </div>
+  </div>
+
+  <br />
+</body>
+
+<%- include('footer') %>

@@ -98,34 +98,6 @@
     </div>
 
     <div style="flex-flow: column; width: calc(100vw * 0.7)">
-      <!-- <% for (let i = 0; i < productList.length; i++) { %>
-      <div class="col-sm-4">
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="<%= productList[i].image_url %>"
-            alt="flower image"
-            style="
-              width: 192px;
-              height: 192px;
-              object-fit: cover;
-              object-position: center center;
-              border-radius: 50;
-            "
-          />
-          <div class="card-body">
-            <h5 class="card-title"><%= productList[i].name %></h5>
-            <p class="card-text"><%= productList[i].price %>$</p>
-            <a
-              href="/product/delete/<%= productList[i].id %>"
-              class="btn btn-primary"
-              role="button"
-              ><i class="fa fa-trash" aria-hidden="true"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <% } %> -->
       <div class="row">
         <% for (let i = 0; i < productList.length; i++) { %>
         <div class="col-sm-4" style="padding: 10px;">

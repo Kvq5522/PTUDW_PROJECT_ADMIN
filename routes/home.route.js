@@ -10,8 +10,8 @@ router.get('/login', (req, res) => {
     controller.getLoginPage(req, res);
 });
 
-router.post('/login', (req, res) => {
-    controller.postLoginPage(req, res);
+router.post('/login', (req, res, next) => {
+    controller.postLoginPage(req, res, next);
 });
 
 router.get('/logout', (req, res) => {

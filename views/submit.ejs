@@ -1,44 +1,87 @@
 <%- include('header') %>
 
-<div class="container">
-  <div class="jumbotron centered">
-    <h1 style="text-align: center; color: white; background-color: black;">Add new product!</h1>
+<body>
+  <div class="container">
+    <div class="jumbotron centered">
+      <h1 style="text-align: center; color: white; background-color: black">
+        Add new product!
+      </h1>
 
-    <form action="/product/submit" method="POST" enctype="multipart\form-data" onsubmit="return validateForm()">
-
-      <div class="form-group">
-        <input type="text" class="form-control text-center" name="productName" id="productName" placeholder="Your product name?" required>
-        <input type="text" class="form-control text-center" name="productPrice" id="productPrice" placeholder="Your product price?" required>
-        <input type="text" class="form-control text-center" name="productColor" id="productColor" placeholder="Your product color?" required>
-        <input type="text" class="form-control text-center" name="productDescription" id="productDescription" placeholder="Your product description?" required>
-        <input type="file" accept="image/*" class="form-control text-center" name="productImage" id="productImage" placeholder="Your transaction image?" required>
-        <input type="hidden" name="dataUrl" id="dataUrl">
-      </div>
-      <button type="submit" class="btn btn-dark">Submit</button>
-    </form>
+      <form
+        action="/product/submit"
+        method="POST"
+        enctype="multipart\form-data"
+        onsubmit="return validateForm()"
+      >
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control text-center"
+            name="productName"
+            id="productName"
+            placeholder="Your product name?"
+            required
+          />
+          <input
+            type="text"
+            class="form-control text-center"
+            name="productPrice"
+            id="productPrice"
+            placeholder="Your product price?"
+            required
+          />
+          <input
+            type="text"
+            class="form-control text-center"
+            name="productColor"
+            id="productColor"
+            placeholder="Your product color?"
+            required
+          />
+          <input
+            type="text"
+            class="form-control text-center"
+            name="productDescription"
+            id="productDescription"
+            placeholder="Your product description?"
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control text-center"
+            name="productImage"
+            id="productImage"
+            placeholder="Your transaction image?"
+            required
+          />
+          <input type="hidden" name="dataUrl" id="dataUrl" />
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+      </form>
+    </div>
   </div>
-</div>
-<script>
-  const file = document.getElementById('productImage');
-  const inputFile = document.getElementById('dataUrl');
+  <script>
+    const file = document.getElementById("productImage");
+    const inputFile = document.getElementById("dataUrl");
 
-  file.addEventListener('change', (e) => {
+    file.addEventListener("change", (e) => {
       const file = e.target.files[0];
       const reader = new FileReader();
       const url = reader.readAsDataURL(file);
       reader.onload = () => {
-          inputFile.value = reader.result;
+        inputFile.value = reader.result;
+      };
+    });
+
+    const validateForm = () => {
+      let x = document.forms["myForm"]["fname"].value;
+
+      if (x == "") {
+        alert("Name must be filled out");
+        return false;
       }
-  });
-
-  const validateForm = () => {
-    let x = document.forms["myForm"]["fname"].value;
-
-    if (x == "") {
-      alert("Name must be filled out");
-      return false;
-    }
-  };
-</script>
+    };
+  </script>
 </body>
 <%- include('footer') %>

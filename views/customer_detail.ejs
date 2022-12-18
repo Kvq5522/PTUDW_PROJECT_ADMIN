@@ -1,0 +1,206 @@
+<%- include('header') %> <%- include('navbar')%>
+
+<body>
+  <br />
+
+  <div style="display: flex; justify-content: center; align-items: center">
+    <div
+      class="container-profile"
+      style="
+        background: #fff;
+        width: calc(100vw * 0.6);
+        margin-top: 5%;
+        margin-left: 25%;
+        position: relative;
+      "
+    >
+      <div
+        class="leftbox"
+        style="
+          float: left;
+          left: -5%;
+          position: absolute;
+          width: 15%;
+          height: 100%;
+          background: blue;
+          box-shadow: 3px 3px 10px rbga(119, 119, 119, 0.5);
+        "
+      >
+        <nav
+          style="
+            list-style: none;
+            padding: 35px;
+            color: #fff;
+            font-size: 1.1em;
+            display: block;
+            transition: all 0.3s ease-and-out;
+          "
+        >
+          <a onclick="tabs(0)" class="tab active">
+            <i class="fa fa-user"></i>
+          </a>
+        </nav>
+      </div>
+      <div class="rightbox" style="width: 60%; margin-left: 27%">
+        <div
+          class="profile tabShow"
+          style="transition: all 0.5s ease-in; width: 80%"
+        >
+          <h1
+            style="
+              text-transform: uppercase;
+              font-size: 1.2rem;
+              margin-bottom: 35px;
+              margin-top: 40px;
+            "
+          >
+            Personal Infomation
+          </h1>
+          <h2
+            style="
+              text-transform: uppercase;
+              font-size: 16px;
+              letter-spacing: 1px;
+              margin-left: 2px;
+              margin-top: 10px;
+            "
+          >
+            Username
+          </h2>
+          <p
+            style="
+              border: 0;
+              border-bottom: 1px solid blue;
+              width: 80%;
+              font-family: 'montserrat', san-serif;
+              font-size: 14px;
+              padding: 7px 0;
+              color: #000000;
+              outline: none;
+            "
+          >
+            <%= detail.username.slice(0, detail.username.indexOf('@')) %>
+          </p>
+          <h2
+            style="
+              text-transform: uppercase;
+              font-size: 16px;
+              letter-spacing: 1px;
+              margin-left: 2px;
+              margin-top: 10px;
+            "
+          >
+            Phone number
+          </h2>
+          <p
+            style="
+              border: 0;
+              border-bottom: 1px solid blue;
+              width: 80%;
+              font-family: 'montserrat', san-serif;
+              font-size: 14px;
+              padding: 7px 0;
+              color: #000000;
+              outline: none;
+            "
+          >
+            <%= detail.phone_number %>
+          </p>
+          <h2
+            style="
+              text-transform: uppercase;
+              font-size: 16px;
+              letter-spacing: 1px;
+              margin-left: 2px;
+              margin-top: 10px;
+            "
+          >
+            Address
+          </h2>
+          <p
+            style="
+              border: 0;
+              border-bottom: 1px solid blue;
+              width: 80%;
+              font-family: 'montserrat', san-serif;
+              font-size: 14px;
+              padding: 7px 0;
+              color: #000000;
+              outline: none;
+            "
+          >
+            <%= detail.address %>
+          </p>
+
+          <h2
+            style="
+              text-transform: uppercase;
+              font-size: 16px;
+              letter-spacing: 1px;
+              margin-left: 2px;
+              margin-top: 10px;
+            "
+          >
+            Status
+          </h2>
+          <p
+            style="
+              border: 0;
+              border-bottom: 1px solid blue;
+              width: 80%;
+              font-family: 'montserrat', san-serif;
+              font-size: 14px;
+              padding: 7px 0;
+              color: #000000;
+              outline: none;
+            "
+          >
+            <%= detail.ban ? 'Banned' : 'Active' %>
+          </p>
+
+          <div style="display: flex; gap: 10px">
+            <a
+              href="/customer/ban/<%= detail.id %>"
+              style="
+                text-transform: uppercase;
+                font-size: 15px;
+                border: 0;
+                color: white;
+                border-radius: 5px;
+                background: blue;
+                padding: 7px 15px;
+                box-shadow: 0px 2px 4px 0px rbga(0, 0, 0, 0.2);
+                cursor: pointer;
+                margin-top: 15px;
+                gap: 10px;
+              "
+            >
+              Ban
+            </a>
+
+            <a
+              href="/customer/unban/<%= detail.id %>"
+              style="
+                text-transform: uppercase;
+                font-size: 15px;
+                border: 0;
+                color: white;
+                border-radius: 5px;
+                background: blue;
+                padding: 7px 15px;
+                box-shadow: 0px 2px 4px 0px rbga(0, 0, 0, 0.2);
+                cursor: pointer;
+                margin-top: 15px;
+                gap: 10px;
+              "
+            >
+              Unban
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<%- include('footer') %>
