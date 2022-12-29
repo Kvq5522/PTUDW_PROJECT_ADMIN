@@ -1,63 +1,161 @@
-<%- include('header') %>
+<%- include('header') %> <%- include('navbar') %>
 
 <body>
-  <hr class="hr-to-paragraph" />
-
   <div
-    class="container"
-    style="display: flex; justify-content: center; align-items: center"
+    style="
+      max-width: calc(100vw * 0.8);
+      padding: 2rem;
+      margin: 0 auto;
+      display: flex;
+    "
   >
-    <form
+    <img
+      src="<%= detail.image_url %>"
+      alt=""
       style="
-        display: flex;
-        background-color: white;
-        gap: 50px;
-        padding: 50px;
-        border-radius: 10px;
-        width: calc(100vw - 100px);
+        width: calc(100vw * 0.3);
+        object-fit: cover;
+        object-position: center center;
+        border-radius: 50;
       "
-    >
-      <div style="display: flex">
-        <img
-          src="<%= item.image_url %>"
-          alt="flower"
-          style="width: 400px; height: 400px; object-fit: cover"
-        />
-      </div>
+    />
 
-      <div
+    <div>
+      <form
+        action="/product/update/<%= detail.id %>"
+        method="POST"
         style="
-          display: flex;
-          flex-flow: column;
-          justify-content: space-between;
-          flex: 2;
+          max-width: 50rem;
+          margin: 0 auto;
+          padding: 2rem;
+          border-radius: 0.5rem;
+          background: var(--bg-color);
         "
       >
-        <div>
-          <h5><%= item.name %></h5>
-          <p><%= item.description %></p>
-        </div>
-        <div
+        <h3
           style="
-            display: flex;
-            justify-content: space-between;
-            justify-self: flex-end;
-            gap: 100px;
+            text-transform: uppercase;
+            color: var(--black);
+            margin-bottom: 1rem;
+            text-align: center;
           "
         >
-          <h5>
-            Price:
-            <div name="price"><%= item.price %>$</div>
-          </h5>
-          <a href="/user/cart/add/<%= item.id %>?price=<%= item.price %>">
-            <i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i>
-          </a>
-        </div>
-      </div>
-    </form>
-  </div>
+          Update Product
+        </h3>
+        <input
+          type="text"
+          placeholder="<%= detail.name %>"
+          name="productName"
+          class="box"
+          style="
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+          "
+        />
 
-  <br />
+        <input
+          type="text"
+          placeholder="<%= detail.price %>"
+          name="productPrice"
+          class="box"
+          style="
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+          "
+        />
+        <input
+          type="text"
+          placeholder="<%= detail.description.length > 30 ? detail.description.slice(0, 30) + '...' : detail.description %>"
+          name="productDescription"
+          class="box"
+          style="
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+          "
+        />
+        <input
+          type="text"
+          placeholder="<%= detail.color %>"
+          name="productColor"
+          class="box"
+          style="
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+          "
+        />
+
+        <div style="display: flex; justify-content: space-between;">
+          <h3>Availability: <%= detail.available ? 'On stock' : 'Out of stock' %></h3>
+
+          <select name="productAvailable">
+            <option value="True"><h3>True</h3></option>
+            <option value="False"><h3>False</h3></option>
+          </select>
+        </div>
+
+        <input
+          type="file"
+          accept="image/*"
+          name="productImage"
+          id="productImage"
+          class="box"
+          style="
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+          "
+        />
+
+        <input type="hidden" name="dataUrl" id="dataUrl">
+
+        <input
+          type="submit"
+          class="btn-update"
+          name="update_product"
+          value="Update product"
+          style="
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1.7rem;
+            padding: 1rem 3rem;
+            background: blue;
+            color: var(--white);
+          "
+        />
+      </form>
+    </div>
+  </div>
 </body>
+
+<script>
+  const file = document.getElementById('productImage');
+  const inputFile = document.getElementById('dataUrl');
+
+  file.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+      const reader = new FileReader();
+      const url = reader.readAsDataURL(file);
+      reader.onload = () => {
+        inputFile.value = reader.result;
+      };
+  });
+</script>
 
 <%- include('footer') %>

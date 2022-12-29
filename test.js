@@ -5,3 +5,10 @@ const express = require('express');
 const app = express();
 
 connectDB();
+
+products.Product.find({}).exec((err, data) => {
+    for (let i = 0; i < data.length; i++) {
+        data[i].available = true;
+        data[i].save();
+    }
+});

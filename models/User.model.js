@@ -8,10 +8,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true  
     },
-    password: {
-        type: String,
-        required: true
-    },
     role: {
         type: String,
         default: 'user'
@@ -30,14 +26,18 @@ const userSchema = new mongoose.Schema({
     },
     recovery_string: {
         type: String,
-        default: "recovery_string"
+        default: ""
     },
     cart: carts.cartSchema,
     registration: {
         type: Date,
         default: Date.now()
     },
-    ban : {
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    ban: {
         type: Boolean,
         default: false
     }
